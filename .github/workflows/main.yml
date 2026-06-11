@@ -16,4 +16,7 @@ jobs:
           ffmpeg -re -i "https://tvsen6.aynaott.com/independenttv/index.m3u8" \
           -c:v libx264 -preset veryfast -b:v 2500k \
           -c:a aac -b:a 128k \
-          -f flv "rtmps://live-api-s.facebook.com:443/rtmp/FB-122221934408563940-0-Ab7jpSN2dWEV86BgYbFcVGPW"
+          -f flv "rtmps://live-api-s.facebook.com:443/rtmp/FB-122221934408563940-1-Ab7N7bFNzKjN171cjEJXLWNh"
+          
+          
+         
