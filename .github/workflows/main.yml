@@ -1,4 +1,4 @@
-name: M3U8 to YouTube Live (No Secret)
+name: M3U8 to Facebook Live (Fixed)
 
 on:
   workflow_dispatch:
@@ -11,12 +11,15 @@ jobs:
       - name: Install FFmpeg
         run: sudo apt-get update && sudo apt-get install ffmpeg -y
 
-      - name: Start Live Stream
+      - name: Start Live Stream (Fixed)
         run: |
-          ffmpeg -re -i "https://tvsen6.aynaott.com/independenttv/index.m3u8" \
+          ffmpeg -reconnect 1 \
+          -reconnect_streamed 1 \
+          -reconnect_delay_max 10 \
+          -rw_timeout 15000000 \
+          -i "https://tvsen6.aynaott.com/independenttv/index.m3u8" \
           -c:v libx264 -preset veryfast -b:v 2500k \
-          -c:a aac -b:a 128k \
-          -f flv "rtmps://live-api-s.facebook.com:443/rtmp/FB-122221934408563940-1-Ab7N7bFNzKjN171cjEJXLWNh"
-          
-          
-         
+          -pix_fmt yuv420p \
+          -c:a aac -b:a 128k -ar 44100 -ac 2 \
+          -f flv \
+          "rtmps://live-api-s.facebook.com:443/rtmp/FB-122221934408563940-1-Ab7N7bFNzKjN171cjEJXLWNh"
